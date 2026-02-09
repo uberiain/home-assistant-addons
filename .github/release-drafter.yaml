@@ -10,6 +10,6 @@ on:
 jobs:
   workflows:
     permissions:
-        contents: write
-        pull-requests: write
+      contents: write
+      pull-requests: write
     uses: hassio-addons/workflows/.github/workflows/release-drafter.yaml@main
