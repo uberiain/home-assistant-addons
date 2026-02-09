@@ -1,13 +1,11 @@
 ---
 name: Formatting
 
-on:
+"on":
   push:
     branches:
       - main
   pull_request:
-  # yamllint disable-line rule:truthy
-  workflow_dispatch:
 
 jobs:
   prettier:
