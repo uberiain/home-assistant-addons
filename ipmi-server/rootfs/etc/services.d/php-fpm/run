@@ -8,4 +8,4 @@
 bashio::log.info "Starting PHP-FPM..."
 
 #/usr/sbin/php-fpm* -F
-exec php-fpm"$PHPVERS" --nodaemonize
+exec php-fpm82 --nodaemonize
