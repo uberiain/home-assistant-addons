@@ -1,8 +1,10 @@
-# Stage 1: Define composer for DL3022 compliance
+# 1. ARGs used in FROM must be at the very top
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:19.0.0
+
+# 2. Define the composer stage
 FROM composer:2.8.5 AS composer_stage
 
-# Stage 2: Main build
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:19.0.0
+# 3. Start the main build using the ARG (it is now globally available)
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -38,10 +40,10 @@ RUN apk update && \
 # Copy root filesystem
 COPY rootfs /
 
-# Pull composer binary from the aliased stage (Fixes DL3022)
+# Pull composer binary from the aliased stage
 COPY --from=composer_stage /usr/bin/composer /usr/bin/composer
 
-# Install app dependencies and clean up in one layer (Fixes DL3059/DL3018)
+# Install app dependencies and clean up
 # hadolint ignore=DL3018
 RUN apk add --no-cache \
         php82-phar \
@@ -52,7 +54,7 @@ RUN apk add --no-cache \
         php82-mbstring && \
     rm /usr/bin/composer
 
-# Consolidated permissions (Fixes DL3059)
+# Consolidated permissions
 RUN if [ -d /app ]; then chown -R nginx /app; fi && \
     chown -R nginx /var/lib/nginx && \
     chmod -R 777 /var/lib/nginx && \
@@ -60,7 +62,7 @@ RUN if [ -d /app ]; then chown -R nginx /app; fi && \
     if [ -d /etc/services.d ]; then chmod -R 755 /etc/services.d; fi && \
     if [ -f /entrypoint.sh ]; then chmod 755 /entrypoint.sh; fi
 
-# Build arguments
+# Build arguments for Hass.io
 ARG BUILD_ARCH
 ARG BUILD_DATE
 ARG BUILD_DESCRIPTION
