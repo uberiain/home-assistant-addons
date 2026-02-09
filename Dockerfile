@@ -27,6 +27,20 @@ WORKDIR /var/www/html
 COPY ./ipmi-server/rootfs/app /var/www/html
 RUN chown -R www-data:www-data /var/www/html
 
+# Pull composer binary from the aliased stage
+COPY --from=composer_stage /usr/bin/composer /usr/bin/composer
+
+# Install app dependencies and clean up
+# hadolint ignore=DL3018
+RUN apk add --no-cache \
+        php82-phar \
+        php82-mbstring && \
+    php82 /usr/bin/composer --working-dir /var/www/html install && \
+    apk del \
+        php82-phar \
+        php82-mbstring && \
+    rm /usr/bin/composer
+
 EXPOSE 80
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
