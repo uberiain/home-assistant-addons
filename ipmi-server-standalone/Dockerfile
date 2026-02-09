@@ -21,12 +21,12 @@ RUN apk add --no-cache \
 RUN docker-php-ext-install bcmath pcntl zip mbstring intl
 
 # 5. Configure Nginx & Supervisor
-COPY nginx.conf /etc/nginx/http.d/default.conf
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY /ipmi-server-standalone/nginx.conf /etc/nginx/http.d/default.conf
+COPY /ipmi-server-standalone/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # 6. Set up app
 WORKDIR /var/www/html
-COPY ../ipmi-server/rootfs/app /var/www/html
+COPY /ipmi-server/rootfs/app /var/www/html
 
 # 7. Copy Composer from the builder stage
 COPY --from=composer_stage /usr/bin/composer /usr/bin/composer
