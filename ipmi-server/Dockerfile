@@ -20,24 +20,22 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install app dependencies
 
 RUN apk -U update
-RUN apk -U upgrade
 RUN apk -U add --no-cache \
     ipmitool
 RUN apk -U add --no-cache \
     nginx=1.28.2-r0
 
-ENV PHPVERS="82"
 RUN apk -U add --no-cache \
-    php$PHPVERS \
-    php$PHPVERS-fpm \
-    php$PHPVERS-openssl \
-    php$PHPVERS-json \
-    php$PHPVERS-ctype \
-    php$PHPVERS-session \
-    php$PHPVERS-tokenizer \
-    php$PHPVERS-opcache \
-    php$PHPVERS-iconv \
-    php$PHPVERS-xml
+    php82 \
+    php82-fpm \
+    php82-openssl \
+    php82-json \
+    php82-ctype \
+    php82-session \
+    php82-tokenizer \
+    php82-opcache \
+    php82-iconv \
+    php82-xml
 
 RUN mkdir -p /app \
     && mkdir -p /app/cache \
@@ -52,12 +50,12 @@ COPY rootfs /
 # Run composer and cleanup afterwards
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN apk -U add --no-cache \
-    php$PHPVERS-phar \
-    php$PHPVERS-mbstring && \
+    php82-phar \
+    php82-mbstring && \
     php82 /usr/bin/composer --working-dir /app install && \
     apk -U del \
-      php$PHPVERS-phar \
-      php$PHPVERS-mbstring && \
+      php82-phar \
+      php82-mbstring && \
     rm /usr/bin/composer
 
 # Corrects permissions for /app directory
