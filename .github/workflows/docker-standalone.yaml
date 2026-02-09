@@ -7,9 +7,11 @@ name: Build Standalone Image
       - main
     tags:
       - "v*"
+  workflow_dispatch:
 
 jobs:
   build:
+    name: Build and Push Docker Image
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -17,23 +19,32 @@ jobs:
       packages: write
 
     steps:
-      - name: Checkout
+      - name: 🏁 Checkout
         uses: actions/checkout@v4
 
-      - name: Log in to GHCR
+      - name: 🏷️ Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/ipmi-server-standalone
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha,format=short
+
+      - name: 🔑 Log in to GHCR
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and Push
+      - name: 🚀 Build and Push
         uses: docker/build-push-action@v6
         with:
           context: .
-          # Point this to your new standalone Dockerfile
           file: ./Dockerfile
           push: true
-          tags: |
-            ghcr.io/${{ github.repository_owner }}/ipmi-server-standalone:latest
-            ghcr.io/${{ github.repository_owner }}/ipmi-server-standalone:${{ github.sha }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
