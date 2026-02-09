@@ -10,6 +10,9 @@ RUN apk add --no-cache \
     bash \
     libzip-dev
 
+RUN apk upgrade --no-cache && \
+    rm -rf /var/cache/apk/*
+    
 # 2. Install PHP extensions
 RUN docker-php-ext-install bcmath pcntl zip
 
