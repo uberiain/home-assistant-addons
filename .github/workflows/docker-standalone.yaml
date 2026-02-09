@@ -6,7 +6,7 @@ name: Build Standalone Image
     branches:
       - main
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   build:
