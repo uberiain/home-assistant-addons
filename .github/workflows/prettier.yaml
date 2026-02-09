@@ -1,0 +1,7 @@
+---
+- name: Check formatting (Warn only)
+  uses: creyD/prettier_action@v4.3
+  continue-on-error: true # This prevents the build from failing
+  with:
+    # Use --check to identify issues without modifying files
+    prettier_options: --check **/*.{js,md,yaml,yml}
