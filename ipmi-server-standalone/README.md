@@ -18,4 +18,4 @@ Without using haos, there is a high probability that you will need to use it.
 
 ## Why do we need Docker image? 
 HAOS has a supervisor who is responsible for downloading plugins, synchronizing configuration, managing lifecycle (start/stop/update), and network isolation. The HA core program does not know how to manipulate the Docker container of the host machine, so the "Add ons" option does not appear in the menu at all.
-So you need manual management.
+So you need manual management, Otherwise, you can only use the impl protocol below v1.5(home-assistant-ipmi By default, a library is used that can handle v1.5)
