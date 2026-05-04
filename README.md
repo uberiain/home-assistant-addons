@@ -7,9 +7,9 @@ This repository has some custom add-ons for Home Assistant
 
 > Tip: There are subtle differences between HAOS and other HA deployment methods, which may require you to use Docker for separate deployment.
 
-# FQA
+# FAQ
 
-- Q: What is this plugin designed for?  
+- Q: What is this addon designed for?  
 - A: This addon was built to work with this Home Assistant integration https://github.com/ateodorescu/home-assistant-ipmi. In theory, you can deploy PHP yourself and configure nginx cgi to deploy it, with the code stored in ` ipmi-server/rootfs/app `. Use ` ipmi-server-standalone/nginx.conf ` nginx config, which is not a recommended solution, but theoretically it can be done this way.  
 
 - Q: Why did I not use HAOS deployment and need a standalone image Docker?  
