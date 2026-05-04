@@ -15,6 +15,8 @@ with some results.
 
 Just copy the `ipmi-server` to your `addon` folder of your HASS installation.
 
+PS: If you have deployed HA in Linux/Docker without using HAOS, then you need to deploy it yourself [ipmi-server-standalone/README.md](./ipmi-server-standalone/README.md) for more details.
+
 ## What should I do with it?
 
 Have a look at this [`ipmi` integration](https://github.com/ateodorescu/home-assistant-ipmi) for HASS.
