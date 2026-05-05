@@ -277,7 +277,7 @@ class IpmiController
                     $results = explode(PHP_EOL, $ret);
                     $device = $this->extractValuesFromResults($results);
 
-                    $ret = $this->runCommand(array_merge($cmd, ['-I', $interface, 'fru']));
+                    $ret = $this->runCommand(array_merge($cmd, ['-I', $interface, 'fru']),$ignoreErrors = true);
 
                     if ($ret) {
                         $results = explode(PHP_EOL, $ret);
