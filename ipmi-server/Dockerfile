@@ -23,7 +23,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apk update && \
     apk add --no-cache \
         ipmitool \
-        nginx=1.28.2-r0 \
+        nginx=1.28.3-r0 \
         php82 \
         php82-fpm \
         php82-openssl \
