@@ -1,5 +1,5 @@
 ---
-name: "IPMItool server"
+name: "IPMItool server (UB)"
 version: "dev"
 slug: "ipmi-server"
 description: "IPMItool server"
