@@ -1,6 +1,6 @@
 ---
 name: "IPMItool server"
-version: "1.0.0"
+version: "dev"
 slug: "ipmi-server"
 description: "IPMItool server"
 url: "https://github.com/uberiain/home-assistant-addons"
